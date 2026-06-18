@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Bonadan | بن العدن — العرض التقديمي</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Noto+Sans+Arabic:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..48,100..700,0..1&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:100%;height:100%;overflow:hidden;font-family:'Cairo','Noto Sans Arabic',sans-serif;background:#4a3528;color:#f3e3d6}
+.slider{width:100%;height:100%;position:relative;display:flex;flex-direction:column}
+.slides-wrapper{flex:1;position:relative;overflow:hidden;width:100%}
+.slide{position:absolute;inset:0;padding:40px 28px 100px;overflow-y:auto;-webkit-overflow-scrolling:touch;opacity:0;visibility:hidden;transition:opacity .45s ease,transform .45s ease;transform:translateY(20px)}
+.slide.active{opacity:1;visibility:visible;transform:translateY(0)}
+.slide::-webkit-scrollbar{width:3px}
+.slide::-webkit-scrollbar-track{background:transparent}
+.slide::-webkit-scrollbar-thumb{background:rgba(243,227,214,0.25);border-radius:10px}
+
+/* slide content */
+.slide h1{font-size:clamp(26px,5vw,44px);font-weight:900;line-height:1.2;margin-bottom:6px;color:#f3e3d6}
+.slide h2{font-size:clamp(18px,3.5vw,28px);font-weight:700;margin-bottom:18px;color:#f3e3d6}
+.slide h3{font-size:clamp(15px,2.5vw,20px);font-weight:700;margin-bottom:10px;margin-top:16px;color:#f3e3d6}
+.slide p{margin-bottom:12px;line-height:1.7;font-size:clamp(14px,2vw,17px);color:#d4c8b8}
+.slide ul{margin-bottom:14px;padding-right:20px;list-style:none}
+.slide ul li{position:relative;padding-right:16px;margin-bottom:6px;line-height:1.6;font-size:clamp(13px,1.9vw,16px);color:#d4c8b8}
+.slide ul li::before{content:"✦";position:absolute;right:0;color:#f3e3d6;font-size:9px;top:7px}
+.slide ul li ul{padding-right:16px;margin-top:4px;margin-bottom:4px}
+.slide ul li ul li::before{content:"•";color:#f3e3d6;font-size:9px}
+.slide ul li ul li{padding-right:14px;font-size:clamp(12px,1.7vw,14px);color:#b8aa98}
+.slide strong{color:#f3e3d6;font-weight:700}
+.slide .tag{display:inline-block;padding:2px 14px;border-radius:50px;font-size:11px;font-weight:700;letter-spacing:.05em;border:1px solid rgba(243,227,214,0.3);color:#f3e3d6;margin-bottom:14px}
+.slide .stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0}
+.slide .stat-card{background:rgba(255,255,255,0.08);border:1px solid rgba(243,227,214,0.1);border-radius:14px;padding:14px;text-align:center}
+.slide .stat-card .num{font-size:clamp(18px,3vw,26px);font-weight:900;color:#f3e3d6}
+.slide .stat-card .lbl{font-size:clamp(11px,1.5vw,13px);color:#b8aa98;margin-top:2px}
+.slide .flow{margin:14px 0;padding:16px;background:rgba(255,255,255,0.06);border:1px solid rgba(243,227,214,0.12);border-radius:14px;font-size:clamp(12px,1.7vw,14px);line-height:1.8;color:#d4c8b8;font-weight:300;white-space:pre-line;direction:ltr;text-align:left}
+.slide .flow strong{color:#f3e3d6;font-weight:700}
+.slide .hero-sub{font-size:clamp(15px,2.5vw,20px);font-weight:400;color:#b8aa98;margin-bottom:20px}
+.slide .badge{display:inline-block;padding:4px 12px;border-radius:50px;background:rgba(243,227,214,0.1);color:#f3e3d6;font-size:11px;font-weight:700;margin-left:4px}
+
+/* falling coffee beans */
+.beans-container{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0;opacity:0;transition:opacity .6s ease}
+.beans-container.active{opacity:1}
+.bean{position:absolute;top:-50px;width:22px;height:32px;border-radius:50%;animation:beanFall linear infinite;opacity:0.6}
+.bean::after{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60%;height:3px;background:rgba(0,0,0,0.15);border-radius:10px}
+@keyframes beanFall{0%{transform:translateY(0) rotate(0deg);opacity:0.6}10%{opacity:0.8}90%{opacity:0.4}100%{transform:translateY(105vh) rotate(360deg);opacity:0}}
+
+/* slides */
+.slide.title-slide{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 28px 120px;z-index:1}
+.slide.title-slide h1{font-size:clamp(36px,7vw,60px);margin-bottom:8px;color:#f3e3d6}
+.slide.title-slide .tagline{font-size:clamp(16px,2.8vw,24px);color:#b8aa98;margin-bottom:4px}
+.slide.title-slide .domain{font-size:clamp(14px,2vw,18px);color:#f3e3d6;font-weight:600;margin-bottom:30px}
+.slide.title-slide .divider{width:60px;height:2px;background:linear-gradient(90deg,transparent,#f3e3d6,transparent);margin:20px auto}
+.slide.title-slide .sub{color:#b8aa98;font-size:clamp(12px,1.5vw,14px)}
+.slide.sep-slide{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;background:rgba(243,227,214,0.03)}
+.slide.sep-slide h2{font-size:clamp(22px,4vw,36px);margin-bottom:0;color:#f3e3d6}
+.slide.sep-slide .sub{color:#b8aa98;margin-top:8px;font-size:clamp(13px,1.8vw,16px)}
+.slide.end-slide{display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:80px 28px 120px}
+.slide.end-slide .end-logo{width:100px;height:100px;object-fit:contain;margin-bottom:20px;border-radius:20px}
+.slide.end-slide h2{font-size:clamp(28px,5vw,44px);font-weight:900;margin-bottom:6px;color:#f3e3d6}
+
+.slide.end-slide .end-prod{font-size:clamp(18px,3vw,24px);color:#f3e3d6;font-weight:700;margin-top:20px}
+.slide.end-slide .end-icon{width:clamp(28px,4.5vw,44px);height:clamp(28px,4.5vw,44px);vertical-align:middle;margin-right:6px}
+
+/* bottom bar */
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;height:64px;background:rgba(74,53,40,0.95);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid rgba(243,227,214,0.1);display:flex;align-items:center;justify-content:space-between;padding:0 16px;z-index:100;direction:ltr}
+.bottom-bar .nav-btn{width:44px;height:44px;border-radius:50%;border:1px solid rgba(243,227,214,0.15);background:transparent;color:#f3e3d6;font-size:20px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;flex-shrink:0}
+.bottom-bar .nav-btn:active{transform:scale(.92)}
+.bottom-bar .nav-btn.disabled{opacity:.2;pointer-events:none}
+.bottom-bar .nav-btn:hover{background:rgba(243,227,214,0.1);color:#fff}
+.bottom-bar .counter{font-size:12px;color:rgba(243,227,214,0.5);font-weight:600;letter-spacing:.05em;direction:ltr;flex-shrink:0}
+.bottom-bar .counter span{color:#f3e3d6}
+.bottom-bar .progress-track{flex:1;height:3px;background:rgba(243,227,214,0.15);border-radius:10px;margin:0 14px;overflow:hidden}
+.bottom-bar .progress-fill{height:100%;background:#f3e3d6;border-radius:10px;transition:width .4s ease;width:0%}
+
+@media(min-width:768px){
+.slide{padding:60px 60px 100px;max-width:800px;margin:0 auto}
+.slide.title-slide{padding:80px 60px 120px}
+.bottom-bar{padding:0 24px;max-width:800px;left:50%;transform:translateX(-50%);border-radius:20px 20px 0 0}
+}
+</style>
+</head>
+<body>
+
+<div class="slider" id="slider">
+  <div class="beans-container" id="beansContainer"></div>
+  <div class="slides-wrapper" id="slidesWrapper">
+    <!-- slides injected by js -->
+  </div>
+  <div class="bottom-bar">
+    <button class="nav-btn" id="prevBtn">‹</button>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+    <div class="counter"><span id="currentSlide">1</span> / <span id="totalSlides">0</span></div>
+    <button class="nav-btn" id="nextBtn">›</button>
+  </div>
+</div>
+
+<script>
+const slides = [
+  { type:'title',
+    h1:'Bonadan | بن العدن',
+    tagline:'متجر البن الفاخر أونلاين',
+    domain:'www.boneldan.top (مثال)',
+    sub:'عرض تقديمي للمشروع'
+  },
+  { type:'content',
+    h2:'نظرة عامة على المشروع',
+    ul:[
+      'متجر إلكتروني متخصص في بيع البن المحمص والقهوة المختصة',
+      'نشتري البن الأخضر الفاخر من أفضل مناطق الزراعة',
+      'نحمصه طازج حسب الطلب ونوصله للعميل في أي مكان',
+      '<b>مكونات المشروع:</b> 9 صفحات عامة + 8 صفحات أدمن + نظام طلبات أونلاين + سلة مشتريات + حسابات عملاء + استضافة ودومين'
+    ]
+  },
+  { type:'content',
+    h2:'التقنيات المستخدمة',
+    h3:'الواجهة الأمامية (Frontend)',
+    ul:[
+      'HTML5 + CSS3 + Tailwind CSS — تصميم متجاوب وسريع',
+      'JavaScript لجميع التفاعلات',
+      'متوافق مع الجوال والتابلت والكمبيوتر',
+      'يدعم العربية والإنجليزية (RTL/LTR)'
+    ],
+    extra:'<h3>الاستضافة</h3><ul><li>سيرفر سريع ومستقر يدعم قاعدة البيانات وتخزين الصور</li></ul><h3>الدومين</h3><ul><li>www.boneldan.top (مثال)</li></ul>'
+  },
+  { type:'content',
+    h2:'SEO — كيف نتصدر نتائج البحث؟',
+    h3:'أولاً: البحث عن الكلمات المفتاحية',
+    ul:[
+      '"بن العدن"، "شراء بن أونلاين"',
+      '"قهوة مختصة توصيل"، "محامص بن"',
+      '"أفضل بن عربي فاخر"'
+    ],
+    extra:'<h3>ثانياً: تحسين الموقع (On-Page)</h3><ul><li>كل صفحة لها عنوان ووصف مخصص</li><li>صور المنتج مضغوطة وسريعة التحميل</li><li>روابط مفهومة (Clean URLs)</li><li>هيكل موقع واضح (Breadcrumbs)</li><li>Structured Data لتخبر جوجل أنه متجر بمنتجات وأسعار</li></ul><h3>ثالثاً: السرعة والأداء</h3><ul><li>الموقع يشتغل بسرعة عالية على الجوال</li><li>تصميم Mobile First — جوجل تعطي الأولوية للجوال</li><li>تحميل تدريجي للصور</li></ul>'
+  },
+  { type:'sep',
+    h2:'صفحات الموقع',
+    sub:'9 صفحات عامة'
+  },
+  { type:'content',
+    h2:'الصفحة الأولى: الرئيسية',
+    ul:[
+      'شريط صور متحرك لأفضل المنتجات',
+      'قسم "منتجات مميزة" — أشهر أنواع البن',
+      'قسم "عروض الأسبوع"',
+      'أقسام التصنيفات الرئيسية (بن عربي، بن تركي، قهوة مختصة)',
+      'شريط تعليقات العملاء',
+      'روابط سريعة للواتساب'
+    ]
+  },
+  { type:'content',
+    h2:'الصفحة الثانية: المتجر (المنتجات)',
+    ul:[
+      'شبكة منتجات مرتبة في كروت مع فلترة حسب التصنيف',
+      'البحث عن منتج بالاسم والترتيب حسب السعر أو الأحدث',
+      'عرض السعر وزر "أضف للسلة"',
+      'تحميل تدريجي عند التمرير'
+    ]
+  },
+  { type:'content',
+    h2:'الصفحة الثالثة: تفاصيل المنتج',
+    ul:[
+      'صور متعددة مع إمكانية التكبير',
+      'اسم المنتج بالعربية والإنجليزية + السعر + وصف تفصيلي',
+      'خيارات: الوزن (250g / 500g / 1kg)',
+      'خيارات: درجة التحميص (خفيف / متوسط / غامق)',
+      'خيارات: نوع الطحن (حبوب / خشن / ناعم / إسبريسو)',
+      'زر "أضف للسلة" + تقييمات العملاء'
+    ]
+  },
+  { type:'content',
+    h2:'الصفحة الرابعة: سلة التسوق',
+    ul:[
+      'المنتجات المضافة مع صورة واسم وكمية وسعر',
+      'تعديل الكمية أو حذف المنتج',
+      'إجمالي الطلب مع إمكانية إدخال كود خصم',
+      'زر "إتمام الطلب" مع شريط تقدم يوضح الخطوات'
+    ]
+  },
+  { type:'content',
+    h2:'الصفحة الخامسة: إتمام الطلب',
+    ul:[
+      '<b>نموذج بيانات التوصيل:</b> الاسم الكامل، رقم الجوال، المدينة، العنوان التفصيلي',
+      'طريقة التوصيل: توصيل للمنزل / شحن',
+      'طريقة الدفع: عند الاستلام / تحويل بنكي',
+      'مراجعة الطلب قبل التأكيد',
+      'تأكيد الطلب وإرسال الرسالة عبر الواتساب'
+    ]
+  },
+  { type:'content',
+    h2:'الصفحة السادسة: عن المتجر',
+    ul:[
+      'قصة بن العدن — من أين جاءت الفكرة',
+      'رؤيتنا ورسالتنا',
+      'لماذا نختلف؟ (جودة البن، التحميص الطازج، التوصيل السريع)',
+      'صور من المحمصة أو المتجر'
+    ]
+  },
+  { type:'content',
+    h2:'الصفحة السابعة: حسابي (بروفايل العميل)',
+    ul:[
+      'تسجيل الدخول أو إنشاء حساب جديد (الاسم + رقم الجوال)',
+      '<b>الطلبات السابقة:</b> تاريخ الطلب، المنتجات، المبلغ الإجمالي، زر "إعادة الطلب"',
+      'العناوين المحفوظة',
+      'تغيير كلمة المرور'
+    ]
+  },
+  { type:'content',
+    h2:'الصفحة الثامنة: العروض',
+    ul:[
+      'عرض العروض والخصومات الحالية',
+      'كل عرض يظهر: نسبة الخصم، المدة، المنتجات المشمولة',
+      'زر لشراء العرض مباشرة'
+    ]
+  },
+  { type:'content',
+    h2:'الصفحة التاسعة: اتصل بنا',
+    ul:[
+      'واتساب (رابط مباشر) + رقم الهاتف',
+      'البريد الإلكتروني',
+      'الموقع على الخريطة',
+      'روابط السوشيال ميديا (إنستغرام، تيك توك، تويتر)'
+    ]
+  },
+  { type:'sep',
+    h2:'صفحات الأدمن',
+    sub:'8 صفحات للتحكم الكامل'
+  },
+  { type:'content',
+    h2:'لوحة التحكم (Dashboard)',
+    ul:[
+      'عدد زوار اليوم وعدد الطلبات اليوم',
+      'إجمالي الإيرادات اليوم وإجمالي المنتجات',
+      'أحدث الطلبات (آخر 10)',
+      'رسم بياني بسيط للطلبات خلال الأسبوع'
+    ]
+  },
+  { type:'content',
+    h2:'إدارة المنتجات',
+    ul:[
+      'إضافة منتج جديد: رفع صور، اسم (عربي + إنجليزي)، تصنيف، سعر',
+      'خيارات: الوزن، درجة التحميص، نوع الطحن',
+      'وصف، ترتيب العرض، إظهار/إخفاء من المتجر',
+      'تعديل وحذف مع بحث وتصفية'
+    ]
+  },
+  { type:'content',
+    h2:'التصنيفات',
+    ul:[
+      'إضافة تصنيف جديد',
+      'ترتيب التصنيفات وتعديل وحذف'
+    ]
+  },
+  { type:'content',
+    h2:'الطلبات',
+    ul:[
+      'جدول بجميع الطلبات: رقم الطلب، اسم العميل، التاريخ، المبلغ، الحالة',
+      'تحديث الحالة (جديد / قيد التجهيز / تم الشحن / تم التوصيل / ملغي)',
+      'تكبير الطلب لرؤية التفاصيل الكاملة',
+      'بحث وتصفية حسب الحالة أو التاريخ'
+    ]
+  },
+  { type:'content',
+    h2:'العملاء',
+    ul:[
+      'عرض قائمة العملاء المسجلين',
+      'لكل عميل: الاسم، رقم الجوال، عدد الطلبات، إجمالي المشتريات',
+      'الضغط على عميل لرؤية طلباته السابقة'
+    ]
+  },
+  { type:'content',
+    h2:'العروض',
+    ul:[
+      'إضافة عرض جديد (الاسم + نسبة الخصم + اختيار المنتجات)',
+      'تشغيل/إيقاف العرض',
+      'جدول بالعروض الحالية والسابقة'
+    ]
+  },
+  { type:'content',
+    h2:'الإعدادات',
+    ul:[
+      'رقم واتساب المتجر ورقم الهاتف',
+      'روابط السوشيال ميديا (إنستغرام، تيك توك، تويتر)',
+      'العنوان والخريطة',
+      'معلومات التوصيل (أسعار الشحن، المدن المتاح لها التوصيل)',
+      'تغيير كلمة مرور الأدمن'
+    ]
+  },
+  { type:'content',
+    h2:'QR Code',
+    ul:[
+      'كود QR للمتجر — للطباعة على الأكياس والكروت',
+      'تحميل بصيغة PNG'
+    ]
+  },
+  { type:'content',
+    h2:'آلية الطلب — خطوة بخطوة',
+    extra:'<div class="flow"><b>العميل</b>\n 1. يدخل الموقع\n 2. يتصفح المنتجات\n 3. يضغط على منتج لرؤية التفاصيل\n 4. يختار الوزن + درجة التحميص + نوع الطحن\n 5. يضيف المنتج إلى السلة\n 6. يكمل التسوق أو يروح للسلة\n 7. يراجع المنتجات والكميات والسعر\n 8. يضغط "إتمام الطلب"\n 9. يكتب بيانات التوصيل\n10. يختار طريقة الدفع (اختياري)\n11. يؤكد الطلب\n12. يظهر له رقم طلب وتأكيد\n\n<b>الأدمن</b>\n13. يفتح لوحة التحكم\n14. يشوف الطلب الجديد\n15. يجهز الطلب ويحدث الحالة</div>'
+  },
+  { type:'content',
+    h2:'قنوات الوصول للمتجر',
+    ul:[
+      '<b>QR Code</b> — على أكياس البن، الفواتير، الكروت، في المحل',
+      '<b>الرابط المباشر</b> — واتساب، إنستغرام، تيك توك، سناب شات، إعلانات',
+      '<b>محركات البحث</b> — جوجل SEO، ظهور في أول صفحة'
+    ]
+  },
+  { type:'content',
+    h2:'بروفايل العميل',
+    ul:[
+      'كل عميل يسجل حساب وله صفحة خاصة تشمل:',
+      '<b>الطلبات السابقة:</b> تاريخ الطلب، المنتجات، المبلغ الإجمالي، الحالة',
+      'إجمالي المشتريات منذ بداية التسجيل',
+      'زر "إعادة الطلب" بنقرة واحدة',
+      'العناوين المحفوظة — ما يحتاج يكتب العنوان كل مرة',
+      'قائمة المفضلة (اختياري)'
+    ]
+  },
+  { type:'end',
+    logo:'logo 2.jpg',
+    h2:'شكراً',
+    prod:'prod by: basel <svg class="end-icon" viewBox="0 0 24 24" fill="none" stroke="#f3e3d6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 3.5v7.5a2.5 2.5 0 0 1-5 0v-4"/><path d="M10.5 11V5.5a2.5 2.5 0 0 1 5 0v6.5"/><path d="M15.5 7v7.5a2.5 2.5 0 0 1-5 0V11"/><path d="M8.5 16.5c0 2.5 1.5 4.5 3.5 4.5s3.5-2 3.5-4.5"/></svg>'
+  }
+];
+
+let current = 0;
+const wrapper = document.getElementById('slidesWrapper');
+const prevBtn = document.getElementById('prevBtn');
+const nextBtn = document.getElementById('nextBtn');
+const progressFill = document.getElementById('progressFill');
+const currentEl = document.getElementById('currentSlide');
+const totalEl = document.getElementById('totalSlides');
+
+function renderSlide(data,i){
+  const div = document.createElement('div');
+  div.className = 'slide' + (data.type==='title'?' title-slide':'') + (data.type==='sep'?' sep-slide':'') + (data.type==='end'?' end-slide':'');
+  if(data.type==='title'||data.type==='sep'||data.type==='end'){
+    if(data.type==='end' && data.logo) div.innerHTML+='<img class="end-logo" src="'+data.logo+'" alt="Bonadan" onerror="this.style.display=\'none\'">';
+    if(data.h1) div.innerHTML+='<h1>'+data.h1+'</h1>';
+    if(data.h2) div.innerHTML+='<h2>'+data.h2+'</h2>';
+    if(data.tagline) div.innerHTML+='<div class="tagline">'+data.tagline+'</div>';
+    if(data.domain) div.innerHTML+='<div class="domain">'+data.domain+'</div>';
+    if(data.type==='title') div.innerHTML+='<div class="divider"></div>';
+    if(data.sub) div.innerHTML+='<div class="sub">'+data.sub+'</div>';
+    if(data.endLine) div.innerHTML+='<div class="end-line">'+data.endLine+'</div>';
+    if(data.prod) div.innerHTML+='<div class="end-prod">'+data.prod+'</div>';
+  } else {
+    if(data.tag) div.innerHTML+='<div class="tag">'+data.tag+'</div>';
+    if(data.h2) div.innerHTML+='<h2>'+data.h2+'</h2>';
+    if(data.hero) div.innerHTML+='<div class="hero-sub">'+data.hero+'</div>';
+    if(data.h3) div.innerHTML+='<h3>'+data.h3+'</h3>';
+    if(data.ul){
+      let html='<ul>';
+      data.ul.forEach(l=>{html+='<li>'+l+'</li>'});
+      html+='</ul>';
+      div.innerHTML+=html;
+    }
+    if(data.extra) div.innerHTML+=data.extra;
+  }
+  return div;
+}
+
+const beansContainer = document.getElementById('beansContainer');
+const beanColors = ['#5a3d2b','#6b4c3a','#4a2e1e','#7a5a44','#3d2517'];
+for(let i=0;i<28;i++){
+  const bean = document.createElement('div');
+  bean.className = 'bean';
+  const size = 16 + Math.random() * 14;
+  bean.style.width = size*0.7+'px';
+  bean.style.height = size+'px';
+  bean.style.left = Math.random()*100+'%';
+  bean.style.animationDuration = (5+Math.random()*8)+'s';
+  bean.style.animationDelay = (Math.random()*12)+'s';
+  bean.style.background = beanColors[Math.floor(Math.random()*beanColors.length)];
+  bean.style.transform = 'rotate('+(Math.random()*360)+'deg)';
+  beansContainer.appendChild(bean);
+}
+
+slides.forEach((data,i)=>{wrapper.appendChild(renderSlide(data,i))});
+totalEl.textContent = slides.length;
+
+function goTo(n){
+  const slidesEls = wrapper.querySelectorAll('.slide');
+  if(n<0||n>=slidesEls.length) return;
+  slidesEls.forEach(s=>{s.classList.remove('active')});
+  slidesEls[n].classList.add('active');
+  beansContainer.classList.toggle('active',n===0);
+  current = n;
+  currentEl.textContent = n+1;
+  progressFill.style.width = ((n+1)/slidesEls.length*100)+'%';
+  prevBtn.classList.toggle('disabled',n===0);
+  nextBtn.classList.toggle('disabled',n===slidesEls.length-1);
+  if(slidesEls[n].scrollTop) slidesEls[n].scrollTop = 0;
+}
+
+let touchStartX = 0;
+let touchStartY = 0;
+let touchDiffX = 0;
+let touchDiffY = 0;
+
+wrapper.addEventListener('touchstart',e=>{
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+},{passive:true});
+
+wrapper.addEventListener('touchend',e=>{
+  touchDiffX = e.changedTouches[0].screenX - touchStartX;
+  touchDiffY = e.changedTouches[0].screenY - touchStartY;
+  if(Math.abs(touchDiffX) > Math.abs(touchDiffY) && Math.abs(touchDiffX) > 50){
+    if(touchDiffX > 0) goTo(current-1);
+    else goTo(current+1);
+  }
+},{passive:true});
+
+prevBtn.addEventListener('click',()=>goTo(current-1));
+nextBtn.addEventListener('click',()=>goTo(current+1));
+
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowLeft') goTo(current-1);
+  if(e.key==='ArrowRight') goTo(current+1);
+});
+
+goTo(0);
+</script>
+</body>
+</html>
